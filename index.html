@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XC21RLQQX4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XC21RLQQX4');
+    </script>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Homepage</title>
+    <link href='../css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/flag-icon.css">
+    <link rel='stylesheet' href='../css/style.css'>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Orbitron&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' />
+    <link rel='stylesheet' href='../css/aos.css' />
+    <link rel="icon" type="image/png" href="../immagini/logo/farnese.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var _iub = _iub || [];
+        _iub.csConfiguration = {
+            "askConsentAtCookiePolicyUpdate": true,
+            "reloadOnConsent": false,
+            "consentOnContinuedBrowsing": false,
+            "floatingPreferencesButtonDisplay": "bottom-right",
+            "invalidateConsentWithoutLog": true,
+            "lang": "it",
+            "perPurposeConsent": true,
+            "siteId": 2877143,
+            "whitelabel": false,
+            "cookiePolicyId": 19801265,
+            "banner": {
+                "acceptButtonDisplay": true,
+                "brandBackgroundColor": "#332D2D",
+                "closeButtonDisplay": false,
+                "customizeButtonDisplay": true,
+                "explicitWithdrawal": true,
+                "listPurposes": true,
+                "logo": "https://farnesecaffe.it/immagini/logo/farnese.png",
+                "position": "float-bottom-center",
+                "rejectButtonDisplay": true
+            },
+            "callback": {
+                //"on2ndLayerShown": function() {
+                //console.log("pippo");
+                //var banner = document.getElementById('iubenda-iframe');
+                //if (banner){banner = banner.innerHTML; console.log(banner);}
+
+                //var banner = document.getElementById('iubenda-cs-banner');
+                //if (banner){banner = banner.innerHTML;}
+                //},
+                "onPreferenceFirstExpressed": function (preferences) {
+                    $.getJSON('https://api.db-ip.com/v2/free/self', function (data) {
+                        var ipaddr = data.ipAddress;
+                        var pref = JSON.stringify(preferences);
+                        $.ajax({
+                            url: '/cookieRequest',
+                            type: 'post',
+                            dataType: 'json',
+                            data: { "ipaddr": ipaddr, "pref": pref },
+                            success: function (data) {
+                                window.location.reload(); //necessario con reloadOnConsent?
+                            }
+                        });
+                    });
+                }
+            }
+        };
+
+        function setLng(l) {
+            if (l == "it-it") {
+                document.getElementById("btn_en").style.display = "none"
+                document.getElementById("btn_it").style.display = "inherit"
+            }
+            else {
+                document.getElementById("btn_en").style.display = "inherit"
+                document.getElementById("btn_it").style.display = "none"
+            }
+        }
+
+        function manageLang() {
+            $.ajax({
+                url: '/session',
+                type: 'post',
+                dataType: 'json',
+                data: { "code": 1 },
+                success: function (lng) {
+                    setLng(lng);
+                    $(".lang").each(function (index, element) {
+                        $(this).text(arrLang[lng][$(this).attr("key")]);
+                    });
+                },
+                error: function (err) {
+                    if (err.status == 200) {
+                        var lng = err.responseText;
+                        setLng(lng);
+                        $(".lang").each(function (index, element) {
+                            $(this).text(arrLang[lng][$(this).attr("key")]);
+                        });
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            manageLang();
+
+            $(".translate").click(function () {
+                var lang = $(this).attr("id");
+                $.ajax({
+                    url: '/session',
+                    type: 'post',
+                    dataType: 'json',
+                    data: { "code": 2, "lang": lang },
+                    success: function (data) {
+                        window.location.reload();
+                    },
+                    error: function (err) {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+    <meta name="index" content="home of website">
+</head>
+
+<body>
+    <div id="loading_screen">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-success" role="status" style="margin-top: 50vh">
+            </div>
+        </div>
+    </div>
+
+    <div style='display: none' id='hideAll'>
+
+        <!-- <div class="d-flex justify-content-center" style="background-color: #FFF; width:100vw; height: 40vh; margin-top: 20vh;" >
+            <p>SITO IN TEST</p>
+        </div> -->
+
+
+        <div class='nav-home fixed-top' id='nav-home' style='opacity: 0;'>
+            <nav class='navbar bg-dark  '>
+
+                <button class=" navbar-toggler hamburger">
+                    <i class="menuIcon material-icons bi bi-list"></i>
+                    <i class="closeIcon material-icons bi bi-x-lg"></i>
+                </button>
+
+                <div class="col container d-flex justify-content-center">
+                    <a class='navbar-brand h-h lang' title="home" href='index.html' key="HOME"></a>
+                    <a class='navbar-brand h-s lang' title="chi_siamo" href='index.html#home' key="CHI_SIAMO"></a>
+                </div>
+                <a class='navbar-brand-logo h-logo' aria-current='page' title="home" href='index.html'>
+                    <img class='logo-farnese-caffe' src='../immagini/logo/farnese.png' alt='Caffè Farnese'>
+                </a>
+
+                <div class="col container d-flex justify-content-center">
+                    <a class='navbar-brand h-p lang' title="prodotti" href='prodotti.html' key="PRODOTTI"></a>
+                    <a class='navbar-brand h-c lang' title="contatti" href='contatti.html' key="CONTATTI"></a>
+
+                    <div class="navbar-brand dropdown h-d">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <a id="btn_en"><span class="flag-icon flag-icon-eng"></span></a>
+                            <a id="btn_it"><span class="flag-icon flag-icon-ita"></span></a>
+                        </button>
+                        <ul class="dropdown-menu" style="background-color:#212529 ;">
+                            <li><a class="dropdown-item translate" id="en-gb" style="color:#c0c0c0"><span
+                                        class="flag-icon flag-icon-eng"></span> English</a></li>
+                            <li><a class="dropdown-item translate" id="it-it" style="color:#c0c0c0"><span
+                                        class="flag-icon flag-icon-ita"></span> Italiano</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <ul class="menu">
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="home" href='index.html'
+                    key="HOME"></a></li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="chi_siamo" href='index.html#home'
+                    key="CHI_SIAMO"></a></li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="prodotti" href='prodotti.html'
+                    key="PRODOTTI"></a></li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="contatti" href='contatti.html'
+                    key="CONTATTI"></a></li>
+        </ul>
+
+
+        <div class='hero'>
+            <div class='hero__content reveal caption' id='frame_1'>
+
+                <div class='row'>
+                    <div class='col d-flex justify-content-center'>
+                        <img class='logo-farnese-caffe_index' src='../immagini/logo/farnese.png'
+                            alt='logo hero caffe Farnese'>
+                        <h1 class='animate-character text_frame_1 lang' key="VEA"></h1>
+                    </div>
+                </div>
+                <div class='row mb-1'>
+                    <div class='col d-flex justify-content-center'>
+                        <div class='btn btn-dark button-3 button-text-3 lang' id='scopri' href='#home' key="SDP"></div>
+                    </div>
+                </div>
+            </div>
+
+            <video autoplay muted loop id='video-back'>
+                <source src='../video/caffe_home.mp4' type='video/mp4'>
+            </video>
+        </div>
+
+        <div id='transcroller-body' class='home '>
+
+            <div class='row mb-3'>
+                <div class='aos-item_title' data-aos='fade-down'>
+                    <div class='aos-item__inner '>
+                        <p class='row text_origin lang' style='margin-left:5vw;margin-right:5vw;' key="S0"></p>
+                        <hr style="height:1vh; width: 90vw; margin-left: 5vw; background:#c0c0c0">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_home lang' key="S1"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/1.jpg' alt='immagine due amici'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/2.jpg' alt='immagine formazione'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_home lang' key="S2"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_home lang' key="S3"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/3.jpg'
+                            alt='immagine materia prima'>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/4.jpg' alt='immagine ricerca'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_home lang' key="S4"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row '>
+                <div class='aos-item_title' data-aos='fade-down'>
+                    <div class='aos-item__inner '>
+                        <p class='row text_origin lang' style='margin-left:5vw;margin-right:5vw;' key="S5"></p>
+
+                        <hr style="height:1vh; width: 90vw; margin-left: 5vw; background:#c0c0c0">
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S6"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/10' alt='immagine provenienza'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/11' alt='immagine leggende'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S7"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S8"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/12' alt='immagine favola'>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/13' alt='immagine narrazione'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S9"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S10"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/14'
+                            alt='immaine commercio iniziale'>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/15' alt='immagine incontro'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S11"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S12"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/16' alt='immagine arrivo'>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class='row '>
+                <div class='aos-item_title' data-aos='fade-down'>
+                    <div class='aos-item__inner '>
+                        <p class='row text_origin lang' style='margin-left:5vw;margin-right:5vw;' key="S13"></p>
+
+                        <hr style="height:1vh; width: 90vw; margin-left: 5vw; background:#c0c0c0">
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S14"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/17' alt='immagine macinazione'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/18' alt='immagine piante'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S15"></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class='row '>
+                <div class='aos-item_title' data-aos='fade-down'>
+                    <div class='aos-item__inner '>
+                        <p class='row text_origin lang' style='margin-left:5vw;margin-right:5vw;' key="S16"></p>
+
+                        <hr style="height:1vh; width: 90vw; margin-left: 5vw; background:#c0c0c0">
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S17"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/19' alt='immagine chicci'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/20' alt='immagine metodo uno'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S18"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S19"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/21' alt='immagine metodo due'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/22' alt='immagine essicamento'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S20"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row mb-3'>
+                <div class='aos-item_title' data-aos='fade-down'>
+                    <div class='aos-item__inner '>
+                        <p class='row text_origin lang' style='margin-left:5vw;margin-right:5vw;' key="S21"></p>
+
+                        <hr style="height:1vh; width: 90vw; margin-left: 5vw; background:#c0c0c0">
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S22"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/23'
+                            alt='immagine processo tostatura'>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/24' alt='immagine passione'>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner'>
+                        <p class='font_storia_origini lang' key="S23"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='row d-flex justify-content-center mb-3'>
+                <div class='aos-item' data-aos='fade-up'>
+                    <div class='aos-item__inner '>
+                        <p class='font_storia_origini lang' key="S24"></p>
+                    </div>
+                </div>
+                <div class='aos-item' data-aos='fade-down'>
+                    <div class='aos-item__inner'>
+                        <img class='img_index_description' src='../immagini/chi_siamo/25' alt='immagine sentimento'>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class='bg-dark text-center text-white '>
+            <div class='container p-5 pb-0 '>
+                <section class='mb-4'>
+
+                    <a class='btn btn-outline-light btn-floating ' style='border-color: #212529;' title="facebook"
+                        href='https://www.facebook.com/FarneseCaffe.parma' role='button'>
+                        <i class='bi bi-facebook'> Caffè Farnese</i>
+                    </a>
+                    <a class='btn btn-outline-light btn-floating m-1' style='border-color: #212529;' title="instagram"
+                        href='https://instagram.com/caffe_farnese?igshid=YmMyMTA2M2Y=' role='button'>
+                        <i class='bi bi-instagram'> @caffe_farnese</i>
+                    </a>
+                    <a class='btn btn-outline-light btn-floating m-1' style='border-color: #212529;' title="whatsapp"
+                        href='whatsapp://send?phone=393276393981text=' role='button'>
+                        <i class='bi bi-whatsapp'> 327 6393981</i>
+                    </a>
+                    <a class='btn btn-outline-light btn-floating m-1' style='border-color: #212529;' title="telefono"
+                        href='tel:+393357632872' role='button'>
+                        <i class='bi bi-telephone'> 335 7632872</i>
+                    </a>
+                    <a class='btn btn-outline-light btn-floating m-1' style='border-color: #212529;' title="mail"
+                        href='mailto:info@farnesecaffe.it' role='button'>
+                        <i class='bi bi-envelope'> info@farnesecaffe.it</i>
+                    </a>
+                </section>
+                <section class='mb-4'>
+                    <div class='row'>
+                        <div class='col'>
+                            <p class='m-1' style='border-color: #212529;'>
+                                <i class='bi bi-house lang'></i><b> SEDE LEGALE: </b>Via Cantelli 16, 43010 Fontevivo
+                                (PR)
+                            </p>
+                        </div>
+                        <div class='col'>
+                            <p class='m-1' style='border-color: #212529;'>
+                                <i class='bi bi-house lang'></i><b> SEDE OPERATIVA: </b>Via Giolitti 8/A, 43126 Parma
+                                (PR)
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section class='mb-4 text-center'>
+                    <a class=' m-1' style='margin-top: 30vh; margin-bottom: 3vh' aria-current='page' title="logo"
+                        href='index.html'>
+                        <img class='logo-farnese-caffe-footer' src='../immagini/logo/farnese.png'
+                            alt='logo footer caffe Farnese'>
+                    </a>
+                </section>
+
+            </div>
+            <div class='text-center p-3' style='background-color: rgba(0, 0, 0, 0.2);'>
+                © 2022 Copyright -
+                <span class='text-white lang' key="FT1"></span>
+                <span class='text-white'> P.iva 02991890340 </span>
+                <a href="https://www.iubenda.com/privacy-policy/19801265"
+                    class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe "
+                    title="Privacy Policy ">Privacy Policy</a>
+                <script
+                    type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                <a href="https://www.iubenda.com/privacy-policy/19801265/cookie-policy"
+                    class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe "
+                    title="Cookie Policy ">Cookie Policy</a>
+                <script
+                    type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                <a class='text-white' href="/sitemap.xml" title="sitemap">Sitemap</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src='../js/aos.js'></script>
+
+    <script>
+
+        AOS.init({
+            easing: 'ease-in-out-sine'
+        });
+
+
+        window.onload = function () { document.getElementById('hideAll').style.display = 'block'; }
+
+        setTimeout(() => {
+            const nav = document.getElementById('nav-home');
+
+            const frame_1 = document.getElementById('frame_1');
+
+            frame_1.style.animation = ' nav_comparse 2s ';
+            frame_1.style.opacity = '1';
+
+            nav.style.animation = ' nav_comparse 2s ';
+            nav.style.opacity = '1';
+
+        }, 2000);
+
+
+        document.getElementById('scopri').onclick = function () {
+            location.href = '#home';
+
+        };
+
+        (function () {
+            if (window.addEventListener) {
+                window.addEventListener("load", nascondi_loading_screen, false);
+            } else {
+                window.attachEvent("onload", nascondi_loading_screen);
+            }
+        })();
+        function nascondi_loading_screen() {
+            document.getElementById("loading_screen").style.display = 'none';
+        }
+
+
+        const menu = document.querySelector(".menu");
+        const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger = document.querySelector(".hamburger");
+        const closeIcon = document.querySelector(".closeIcon");
+        const menuIcon = document.querySelector(".menuIcon");
+
+        function toggleMenu() {
+            if (menu.classList.contains("showMenu")) {
+                menu.classList.remove("showMenu");
+                closeIcon.style.display = "none";
+                menuIcon.style.display = "block";
+            } else {
+                menu.classList.add("showMenu");
+                closeIcon.style.display = "block";
+                menuIcon.style.display = "none";
+            }
+        }
+
+        hamburger.addEventListener("click", toggleMenu);
+
+
+
+    </script>
+    <script src='https://kit.fontawesome.com/9e95f3b251.js' crossorigin='anonymous'></script>
+    <script src='../js/bootstrap.bundle.min.js'></script>
+    <script src='../js/lang.js'></script>
+</body>
+
+</html>
