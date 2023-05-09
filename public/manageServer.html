@@ -1,0 +1,35 @@
+<html lang='en'>
+	<head>
+		<title>Manage Server</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(function ()
+			{
+				$('#btEnter').click(function ()
+				{
+					$.ajax(
+					{
+						url: '/requests',
+						type: 'post',
+						data: {check:$("#psw").text()},
+						success: function(data)
+						{
+							if (data=="")
+							{
+								$("#err").html("<b>Password errata.</b>");
+							}
+							else
+							{
+								document.write(data);
+							}
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		Password <input type="password" id="psw" name="psw"/><input type="button" id="btEnter" name="btEnter" value="Entra"/><br>
+		<span id="err" name="err" style="color:red;"></span>
+	</body>
+</html>
