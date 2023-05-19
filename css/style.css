@@ -307,6 +307,33 @@
   width: 100vw;
 }
 
+
+/* .home-one-love {
+  background: #000;
+  height: 100vh;
+  z-index: 0;
+} */
+
+.home-one-love {
+  background: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0.5, 0, 0.9)), url('../immagini/one_love/AFPH0124.jpg') no-repeat center right ;
+  transition: all 2s ease-in-out;
+  background-size: 110% 110%;
+  background-position: center center;
+  animation: shrink 5s infinite alternate;
+  height: 100vh;
+  
+}  
+
+@keyframes shrink {
+  0% {
+    background-size: 110% 110%;
+  }
+
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
 /* .contactForm{
   width: 50vw;;
 } */
@@ -361,6 +388,25 @@
   font-size: 2vh;
   width: 20vw;
   
+}
+
+.navbar-brand-logo-one-love {
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  color: #c0c0c0;
+  font-size: 2vh;
+  width: 20vw;
+  scale: 1.5;
+
+}
+
+
+.navbar-brand-logo-secondary{
+  font-family: 'Inter', sans-serif;
+  color: #c0c0c0;
+  font-size: 2vh;
+  scale: 1.5;
+
 }
 
 .navbar-toggler{display: none;}
@@ -961,6 +1007,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 2;
 }
 
 

@@ -16,11 +16,11 @@ const options = {key: fs.readFileSync("/etc/letsencrypt/live/farnesecaffe.it-000
 const dbconn = mysql.createConnection({host : 'localhost', user : 'root', password : 'Matisse2022', database : 'farnesecaffe'});
 //const dbconn = mysql.createPool({host : 'localhost', user : 'root', password : 'Matisse2022', database : 'farnesecaffe'});
 const mailconn = nodemailer.createTransport({host: "smtps.aruba.it", auth: {user: 'no-reply@farnesecaffe.it', pass: 'Farnese.2020'}, port: 465});
+const domains = ["farnesecaffe.it","simonetovagliari.farnesecaffe.it"];
 
 //constructors
 const app = express();
 const router = express.Router();
-const server = https.createServer(options,app);
 // const redisclient = redis.createClient({ legacyMode: true });
 const redisclient = redis.createClient();
 
@@ -34,11 +34,21 @@ app.use("/",express.static(__dirname+"/descrizioni"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({secret: 'BerTiv2022', store: new redisStore({ host: 'localhost', port: 6379, client: redisclient, ttl: 260}), saveUninitialized: false, resave: false}));
+app.use('/', router);
 
+//app.use((req, res, next) =>
+//{
+    //const host = req.hostname; 
+    //if (req.headers.host == domains[0]) {return res.redirect('https://farnesecaffe.it/');}
+    //else {res.redirect('https://' + req.headers.host + req.originalUrl);}
+    //else {return res.redirect(__dirname+'/contatti.html');}
+    //next();
+//});
 
 //MySQL connection
 dbconn.connect();
 
+const server = https.createServer(options, app);
 
 function checkLangSession(r)
 {
@@ -49,13 +59,14 @@ function checkLangSession(r)
 
 router.get('/',(req,res) =>
 {
-	// req=checkLangSession(req);
-    res.sendFile(__dirname);
+    // req=checkLangSession(req);
+    if (req.headers.host == domains[0]) {res.sendFile(__dirname);}
+    else {res.writeHead(200, { 'Content-Type': 'text/plain' }).send('Benvenuto nel sottodominio del dominio di secondo livello!');}
 });
 
 router.get('/:det',(req,res) =>
 {
-	// req=checkLangSession(req);
+    // req=checkLangSession(req);
     var det = req.params.det;
     if (det=="prodotti") res.sendFile(__dirname+"/public/prodotti.html");
     else if (det=="contatti") res.sendFile(__dirname+"/public/contatti.html");
@@ -328,6 +339,5 @@ http.get('*',function(req, res)
     //res.redirect('https://example.com' + req.url);
 });
 
-app.use('/', router);
 http.listen(portHTTP);
 server.listen(portHTTPS);
