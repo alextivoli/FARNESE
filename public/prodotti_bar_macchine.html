@@ -6,24 +6,24 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XC21RLQQX4"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-XC21RLQQX4');
+        gtag('config', 'G-XC21RLQQX4');
     </script>
 
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Macchine</title>
-    <link href='../css/bootstrap.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/flag-icon.css">
-    <link rel='stylesheet' href='../css/style.css'>
+    <link href='../../css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../css/flag-icon.css">
+    <link rel='stylesheet' href='../../css/style.css'>
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Orbitron&display=swap' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' />
-    <link rel="icon" type="image/png" href="../immagini/logo/farnese.png" />
+    <link rel="icon" type="image/png" href="../../immagini/logo/farnese.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script>
@@ -149,48 +149,48 @@
     </script>
     <script type="text/javascript">
         var _iub = _iub || [];
-        _iub.csConfiguration = { 
-		"askConsentAtCookiePolicyUpdate": true,
-		"consentOnContinuedBrowsing": false,
-		"floatingPreferencesButtonDisplay": "bottom-right",
-		"invalidateConsentWithoutLog": true,
-		"lang": "it",
-		"perPurposeConsent": true,
-		"siteId": 2877143,
-		"whitelabel": false,
-		"cookiePolicyId": 19801265,
-		"banner": { 
-			"acceptButtonDisplay": true,
-			"brandBackgroundColor": "#332D2D",
-			"closeButtonDisplay": false,
-			"customizeButtonDisplay": true,
-			"explicitWithdrawal": true,
-			"listPurposes": true,
-			"logo": "https://farnesecaffe.it/immagini/logo/farnese.png",
-			"position": "float-bottom-center",
-			"rejectButtonDisplay": true
-		},
-		"callback": {
-            		"onPreferenceFirstExpressed": function(preferences) {
-				$.getJSON('https://api.db-ip.com/v2/free/self', function(data) {
-					var ipaddr = data.ipAddress;
-					var pref = JSON.stringify(preferences);
-					$.ajax({
-                            			url: '/cookieRequest',
-                            			type: 'post',
-                            			dataType: 'json',
-                            			data: {"ipaddr":ipaddr,"pref":pref},
-                            			success: function (data) {
-                                			window.location.reload();
-                            			}
-                        		});
-				});
-			}
-        	}
-	};
+        _iub.csConfiguration = {
+            "askConsentAtCookiePolicyUpdate": true,
+            "consentOnContinuedBrowsing": false,
+            "floatingPreferencesButtonDisplay": "bottom-right",
+            "invalidateConsentWithoutLog": true,
+            "lang": "it",
+            "perPurposeConsent": true,
+            "siteId": 2877143,
+            "whitelabel": false,
+            "cookiePolicyId": 19801265,
+            "banner": {
+                "acceptButtonDisplay": true,
+                "brandBackgroundColor": "#332D2D",
+                "closeButtonDisplay": false,
+                "customizeButtonDisplay": true,
+                "explicitWithdrawal": true,
+                "listPurposes": true,
+                "logo": "https://farnesecaffe.it/immagini/logo/farnese.png",
+                "position": "float-bottom-center",
+                "rejectButtonDisplay": true
+            },
+            "callback": {
+                "onPreferenceFirstExpressed": function (preferences) {
+                    $.getJSON('https://api.db-ip.com/v2/free/self', function (data) {
+                        var ipaddr = data.ipAddress;
+                        var pref = JSON.stringify(preferences);
+                        $.ajax({
+                            url: '/cookieRequest',
+                            type: 'post',
+                            dataType: 'json',
+                            data: { "ipaddr": ipaddr, "pref": pref },
+                            success: function (data) {
+                                window.location.reload();
+                            }
+                        });
+                    });
+                }
+            }
+        };
     </script>
     <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
-    <meta name ="machine products" content ="products machine of Farnese Caffè">
+    <meta name="machine products" content="products machine of Farnese Caffè">
 </head>
 
 <body>
@@ -210,25 +210,28 @@
                 </button>
 
                 <div class="col container d-flex justify-content-center">
-                    <a class='navbar-brand h-h lang' title="home" href='index.html' key="HOME" ></a>
-                    <a class='navbar-brand h-s lang'  title="chi_siamo" href='index.html#home' key="CHI_SIAMO"></a>
+                    <a class='navbar-brand h-h lang' title="home" href='/home' key="HOME"></a>
+                    <a class='navbar-brand h-s lang' title="chi_siamo" href='/home#home' key="CHI_SIAMO"></a>
                 </div>
-                    <a class='navbar-brand-logo h-logo' aria-current='page' title="home" href='index.html'>
-                        <img class='logo-farnese-caffe' src='../immagini/logo/farnese.png' alt='Caffè Farnese'>
-                    </a>
+                <a class='navbar-brand-logo h-logo' aria-current='page' title="home" href='/home'>
+                    <img class='logo-farnese-caffe' src='../../img/logo/farnese.png' alt='Caffè Farnese'>
+                </a>
 
                 <div class="col container d-flex justify-content-center">
-                    <a class='navbar-brand h-p lang' title="prodotti" href='prodotti.html' key="PRODOTTI"></a>
-                    <a class='navbar-brand h-c lang' title="contatti" href='contatti.html' key="CONTATTI"></a>
+                    <a class='navbar-brand h-p lang' title="prodotti" href='/prodotti' key="PRODOTTI"></a>
+                    <a class='navbar-brand h-c lang' title="contatti" href='/contatti' key="CONTATTI"></a>
 
                     <div class="navbar-brand dropdown h-d">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                            <a id="btn_en"><span class="flag-icon flag-icon-eng"  ></span></a>
-                            <a id="btn_it" ><span class="flag-icon flag-icon-ita"  ></span></a>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <a id="btn_en"><span class="flag-icon flag-icon-eng"></span></a>
+                            <a id="btn_it"><span class="flag-icon flag-icon-ita"></span></a>
                         </button>
                         <ul class="dropdown-menu" style="background-color:#212529 ;">
-                        <li><a class="dropdown-item translate" id="en-gb" style="color:#c0c0c0"><span class="flag-icon flag-icon-eng"></span> English</a></li>
-                        <li><a class="dropdown-item translate" id="it-it" style="color:#c0c0c0"><span class="flag-icon flag-icon-ita"></span> Italiano</a></li>
+                            <li><a class="dropdown-item translate" id="en-gb" style="color:#c0c0c0"><span
+                                        class="flag-icon flag-icon-eng"></span> English</a></li>
+                            <li><a class="dropdown-item translate" id="it-it" style="color:#c0c0c0"><span
+                                        class="flag-icon flag-icon-ita"></span> Italiano</a></li>
                         </ul>
                     </div>
                 </div>
@@ -236,14 +239,16 @@
         </div>
 
         <ul class="menu">
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="home" href='index.html'
-                    key="HOME"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="chi_siamo" href='index.html#home'
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="home" href='/home' key="HOME"></a>
+            </li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="chi_siamo" href='/home#home'
                     key="CHI_SIAMO"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="prodotti" href='prodotti.html'
-                    key="PRODOTTI"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="contatti" href='contatti.html'
-                    key="CONTATTI"></a></li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="prodotti" href='/prodotti'
+                    key="PRODOTTI"></a>
+            </li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="contatti" href='/contatti'
+                    key="CONTATTI"></a>
+            </li>
         </ul>
 
 
@@ -258,12 +263,14 @@
             </div>
             <div id="btn_machine" class='row  frame_macchine  ' style='background-color:#4a2719cc; opacity: 0%;'>
                 <div class='col d-flex justify-content-center ' style='text-align: center;'>
-                    <a id='bnt_mcialde' class=' btn btn-dark  button_text_machine_change d-flex justify-content-center lang' title="macchina_cialde"
-                        href='#frame_one' key='PBM2' ></a>
+                    <a id='bnt_mcialde'
+                        class=' btn btn-dark  button_text_machine_change d-flex justify-content-center lang'
+                        title="macchina_cialde" href='#frame_one' key='PBM2'></a>
                 </div>
                 <div class='col d-flex justify-content-center ' style='text-align: center;'>
-                    <a id='bnt_mcapsule' class=' btn btn-dark button_text_machine_change d-flex justify-content-center lang' title="macchina_capsule"
-                        href='#frame_two' key='PBM3'></a>
+                    <a id='bnt_mcapsule'
+                        class=' btn btn-dark button_text_machine_change d-flex justify-content-center lang'
+                        title="macchina_capsule" href='#frame_two' key='PBM3'></a>
                 </div>
             </div>
 
@@ -313,11 +320,15 @@
 
                         <div class="mb-3 form-group">
                             <div class="form-check">
-                                
-                                <label class="form-check-label" for="invalidCheck"
-                                        style='color: rgb(255, 255, 255);'>
-                                        <p class="lang" key="FORM6"></p> <a href="https://www.iubenda.com/terms-and-conditions/19801265" class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Terms and Conditions ">Terms and Conditions</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-                                    </label>
+
+                                <label class="form-check-label" for="invalidCheck" style='color: rgb(255, 255, 255);'>
+                                    <p class="lang" key="FORM6"></p> <a
+                                        href="https://www.iubenda.com/terms-and-conditions/19801265"
+                                        class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe "
+                                        title="Terms and Conditions ">Terms and Conditions</a>
+                                    <script
+                                        type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                                </label>
                                 <input class="form-check-input" type="checkbox" name="invalidCheck" id="invalidCheck">
 
                             </div>
@@ -375,8 +386,9 @@
                     </div>
                 </section>
                 <section class='mb-4 text-center'>
-                    <a class=' m-1' style='margin-top: 30vh; margin-bottom: 3vh' aria-current='page' title="logo" href='index.html'>
-                        <img class='logo-farnese-caffe-footer' src='../immagini/logo/farnese.png'
+                    <a class=' m-1' style='margin-top: 30vh; margin-bottom: 3vh' aria-current='page' title="logo"
+                        href='index.html'>
+                        <img class='logo-farnese-caffe-footer' src='../../img/logo/farnese.png'
                             alt='logo caffe Farnese footer'>
                     </a>
                 </section>
@@ -389,9 +401,14 @@
                 <a href="https://www.iubenda.com/privacy-policy/19801265"
                     class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe "
                     title="Privacy Policy ">Privacy Policy</a>
-                <script type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
-                <a href="https://www.iubenda.com/privacy-policy/19801265/cookie-policy" class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie Policy ">Cookie Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-                <a class='text-white' href="../sitemap.xml" title="sitemap">Sitemap</a>
+                <script
+                    type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                <a href="https://www.iubenda.com/privacy-policy/19801265/cookie-policy"
+                    class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe "
+                    title="Cookie Policy ">Cookie Policy</a>
+                <script
+                    type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                <a class='text-white' href="../../sitemap.xml" title="sitemap">Sitemap</a>
             </div>
         </footer>
     </div>
@@ -455,8 +472,8 @@
         hamburger.addEventListener("click", toggleMenu);
     </script>
     <script src='https://kit.fontawesome.com/9e95f3b251.js' crossorigin='anonymous'></script>
-    <script src='../js/bootstrap.bundle.min.js'></script>
-    <script src='../js/lang.js'></script>
+    <script src='../../js/bootstrap.bundle.min.js'></script>
+    <script src='../../js/lang.js'></script>
 </body>
 
 </html>

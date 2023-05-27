@@ -202,16 +202,16 @@
                 </button>
 
                 <div class="col container d-flex justify-content-center">
-                    <a class='navbar-brand h-h lang' title="home" href='index.html' key="HOME"></a>
-                    <a class='navbar-brand h-s lang' title="chi_siamo" href='index.html#home' key="CHI_SIAMO"></a>
+                    <a class='navbar-brand h-h lang' title="home" href='/home' key="HOME"></a>
+                    <a class='navbar-brand h-s lang' title="chi_siamo" href='/home#home' key="CHI_SIAMO"></a>
                 </div>
-                <a class='navbar-brand-logo h-logo' aria-current='page' title="home" href='index.html'>
-                    <img class='logo-farnese-caffe' src='../immagini/logo/farnese.png' alt='Caffè Farnese'>
+                <a class='navbar-brand-logo h-logo' aria-current='page' title="home" href='/home'>
+                    <img class='logo-farnese-caffe' src='../img/logo/farnese.png' alt='Caffè Farnese'>
                 </a>
 
                 <div class="col container d-flex justify-content-center">
-                    <a class='navbar-brand h-p lang' title="prodotti" href='prodotti.html' key="PRODOTTI"></a>
-                    <a class='navbar-brand h-c lang' title="contatti" href='contatti.html' key="CONTATTI"></a>
+                    <a class='navbar-brand h-p lang' title="prodotti" href='/prodotti' key="PRODOTTI"></a>
+                    <a class='navbar-brand h-c lang' title="contatti" href='/contatti' key="CONTATTI"></a>
 
                     <div class="navbar-brand dropdown h-d">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -231,13 +231,13 @@
         </div>
 
         <ul class="menu">
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="home" href='index.html'
-                    key="HOME"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="chi_siamo" href='index.html#home'
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="home" href='/home' key="HOME"></a>
+            </li>
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="chi_siamo" href='/home#home'
                     key="CHI_SIAMO"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="prodotti" href='prodotti.html'
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="prodotti" href='/prodotti'
                     key="PRODOTTI"></a></li>
-            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="contatti" href='contatti.html'
+            <li><a class='btn  btn-block m-0 lang' style='color: #c0c0c0;' title="contatti" href='/contatti'
                     key="CONTATTI"></a></li>
         </ul>
 
@@ -253,8 +253,10 @@
                 <div class="row" id="slide_animated_index" style="opacity: 0;">
                     <div class="contact_email container  d-flex justify-content-center">
                         <div class="col" style="margin-left: 3vw; margin-right: 3vw;text-align: center;">
-                            <div class="row mt-3 d-flex justify-content-center" >
-                                <i class='text_contact_cap bi bi-house'></i><b class=" text_contact_cap lang" key="SL"></b><p class='text_contact_cap lang' key="C1"></p>
+                            <div class="row mt-3 d-flex justify-content-center">
+                                <i class='text_contact_cap bi bi-house'></i><b class=" text_contact_cap lang"
+                                    key="SL"></b>
+                                <p class='text_contact_cap lang' key="C1"></p>
                             </div>
                             <div class='row mt-3 '>
                                 <p class='text_contact_cap'><i class='bi bi-house'></i><b class="lang" key="SO"></b>Via
@@ -307,45 +309,51 @@
                                 <input type="text" name="name" id="name" class="form-control text_contact_input"
                                     placeholder="Nome e Cognome">
                             </div>
-    
+
                             <div class="mb-3 form-group">
                                 <label class="form-label text_contact lang" for="soc" key="FORM2"></label>
                                 <input class="form-control text_contact_input " name="soc" id="soc" type="text"
                                     placeholder="Società">
                             </div>
-    
+
                             <div class="mb-3 form-group">
                                 <label class="form-label text_contact lang" for="emailAddress" key="FORM3"></label>
                                 <input class="form-control text_contact_input form-control" name="emailAddress"
                                     id="emailAddress" type="email" placeholder="Indirizzo email">
                             </div>
-    
+
                             <!-- Number input -->
                             <div class="mb-3 form-group">
                                 <label class="form-label text_contact lang" for="number" key="FORM4"></label>
                                 <input class="form-control text_contact_input form-control" name="number" id="number"
                                     type="tel" placeholder="Telefono">
                             </div>
-    
+
                             <div class="mb-3 form-group">
                                 <label class="form-label text_contact lang" for="message" key="FORM5"></label>
-                                <textarea class="form-control text_contact_input form-control" name="message" id="message"
-                                    type="text" placeholder="Messaggio" style="height: 10rem;"></textarea>
+                                <textarea class="form-control text_contact_input form-control" name="message"
+                                    id="message" type="text" placeholder="Messaggio" style="height: 10rem;"></textarea>
                             </div>
-    
+
                             <div class="mb-3 form-group">
                                 <div class="form-check">
-                                    
+
                                     <label class="form-check-label" for="invalidCheck"
-                                            style='color: rgb(255, 255, 255);'>
-                                            <p class="lang" key="FORM6"></p> <a href="https://www.iubenda.com/terms-and-conditions/19801265" class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Terms and Conditions ">Terms and Conditions</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-                                        </label>
-                                    <input class="form-check-input" type="checkbox" name="invalidCheck" id="invalidCheck">
-    
+                                        style='color: rgb(255, 255, 255);'>
+                                        <p class="lang" key="FORM6"></p> <a
+                                            href="https://www.iubenda.com/terms-and-conditions/19801265"
+                                            class="iubenda-white no-brand iubenda-noiframe iubenda-embed iubenda-noiframe "
+                                            title="Terms and Conditions ">Terms and Conditions</a>
+                                        <script
+                                            type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="invalidCheck"
+                                        id="invalidCheck">
+
                                 </div>
                             </div>
-    
-    
+
+
                             <div class="mb-3 d-grid form-group">
                                 <input name="formBt" id="formBt" class="btn submit button_contact_submit btn-lg "
                                     type="submit" value="Send" class="form-control">
@@ -396,9 +404,9 @@
                     </div>
                 </section>
                 <section class='mb-4 text-center'>
-                    <a class=' m-1' style='margin-top: 30vh; margin-bottom: 3vh' aria-current='page' href='index.html'
+                    <a class=' m-1' style='margin-top: 30vh; margin-bottom: 3vh' aria-current='page' href='/home'
                         title="logo">
-                        <img class='logo-farnese-caffe-footer' src='../immagini/logo/farnese.png'
+                        <img class='logo-farnese-caffe-footer' src='../img/logo/farnese.png'
                             alt='logo caffe Farnese footer'>
                     </a>
                 </section>

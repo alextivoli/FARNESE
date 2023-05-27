@@ -1,5 +1,5 @@
-//import modules
 const express = require('express');
+const app = express();
 const session = require('express-session');
 const redis = require('redis');
 const redisStore = require('connect-redis')(session);
@@ -12,51 +12,30 @@ const http = express();
 const bodyParser = require('body-parser');
 const portHTTP = process.env.PORT || "80";
 const portHTTPS = process.env.PORT || "443";
-const options = {key: fs.readFileSync("/etc/letsencrypt/live/farnesecaffe.it-0001/privkey.pem"), cert: fs.readFileSync("/etc/letsencrypt/live/farnesecaffe.it-0001/fullchain.pem")};
+const options = {key: fs.readFileSync("/etc/letsencrypt/live/farnesecaffe.it-0001/privkey.pem"), cert:fs.readFileSync("/etc/letsencrypt/live/farnesecaffe.it-0001/fullchain.pem")};
 const dbconn = mysql.createConnection({host : 'localhost', user : 'root', password : 'Matisse2022', database : 'farnesecaffe'});
-//const dbconn = mysql.createPool({host : 'localhost', user : 'root', password : 'Matisse2022', database : 'farnesecaffe'});
 const mailconn = nodemailer.createTransport({host: "smtps.aruba.it", auth: {user: 'no-reply@farnesecaffe.it', pass: 'Farnese.2020'}, port: 465});
 const domains = ["farnesecaffe.it","simonetovagliari.farnesecaffe.it"];
-
-//constructors
-const app = express();
-const router = express.Router();
-// const redisclient = redis.createClient({ legacyMode: true });
 const redisclient = redis.createClient();
 
-app.use("/",express.static(__dirname));
-app.use("/",express.static(__dirname+"/public"));
-app.use("/",express.static(__dirname+"/video"));
-app.use("/",express.static(__dirname+"/js"));
-app.use("/",express.static(__dirname+"/immagini"));
-app.use("/",express.static(__dirname+"/css"));
-app.use("/",express.static(__dirname+"/descrizioni"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({secret: 'BerTiv2022', store: new redisStore({ host: 'localhost', port: 6379, client: redisclient, ttl: 260}), saveUninitialized: false, resave: false}));
-app.use('/', router);
+app.use(express.static(path.join(__dirname, 'public'))); //index e sitemap vanno dentro public
+app.use("/video", express.static(path.join(__dirname, 'video')));
+app.use("/js", express.static(path.join(__dirname, 'js')));
+app.use("/img", express.static(path.join(__dirname, 'immagini')));
+app.use("/css", express.static(path.join(__dirname, 'css')));
+app.use("/descr", express.static(path.join(__dirname, 'descrizioni')));
+app.use("/flags", express.static(path.join(__dirname, 'flags')));
 
-app.use((req, res) =>
-{
-    // const host = req.hostname; 
-    // if (req.headers.host == domains[0]) {return res.redirect('https://farnesecaffe.it/');}
-    // else {res.redirect('https://' + req.headers.host + req.originalUrl);}
-    // else {return res.redirect(__dirname+'/contatti.html');}
 
-	const host = req.hostname;
-	console.log(host);
-	if (host === 'simonetovagliari.farnesecaffe.it') {
-		// Effettua il reindirizzamento alla pagina specifica
-		console.log("test");
-		return res.redirect('https://simonetovagliari.farnesecaffe.it/contatti.html');
-		
-	}
-});
-
-//MySQL connection
-dbconn.connect();
 
 const server = https.createServer(options, app);
+dbconn.connect();
+
+//---------------------------------------------------------------------------------------------------------------
 
 function checkLangSession(r)
 {
@@ -65,45 +44,111 @@ function checkLangSession(r)
 	return r;
 }
 
-router.get('/',(req,res) =>
+//---------------------------------------------------------------------------------------------------------------
+//res.sendFile(indexFile, { root: __dirname + '/public' });
+
+//app.use(function(req, res, next)
+//{
+//	if (req.headers.host === domains[0])
+//	{
+//		res.redirect('https://' + req.headers.host + "/home");
+//	}
+//	else
+//	{
+//		next();
+//	}
+//});
+
+//app.use(function(req, res)
+//{
+//	if (req.headers.host === domains[1])
+//	{
+//		res.redirect('https://' + req.headers.host + "/home");
+//	}
+//});
+
+app.get('/', function(req,res)
 {
-    // req=checkLangSession(req);
-    if (req.headers.host == domains[0]) {res.sendFile(__dirname);}
-    else {res.writeHead(200, { 'Content-Type': 'text/plain' }).send('Benvenuto nel sottodominio del dominio di secondo livello!');}
+	//res.sendFile(__dirname + "/public/index.html");
+	console.log("aaaaaa");
+	res.redirect('https://' + req.headers.host + "/home");
 });
 
-router.get('/:det',(req,res) =>
+app.get('/:det', function(req,res)
 {
-    // req=checkLangSession(req);
+	console.log("bbbbbb");
+	var det = req.params.det;
+	var host = req.headers.host;
+    	if (det == "prodotti") res.sendFile(__dirname + "/public/prodotti.html");
+    	else if (det == "contatti") res.sendFile(__dirname + "/public/contatti.html");
+    	else if (det == "manageServer") res.sendFile(__dirname + "/public/manageServer.html");
+	else if (det == "home" && host == domains[0]) res.sendFile(__dirname + "/public/index.html");
+	else if (det == "home" && host == domains[1]) res.sendFile(__dirname + "/simonetovagliari/index.html");
+    	else res.status(404).send("Opss! Pagina errata o accesso non consentito.");
+});
+
+app.get('/prodotti/:det', function(req,res)
+{
     var det = req.params.det;
-    if (det=="prodotti") res.sendFile(__dirname+"/public/prodotti.html");
-    else if (det=="contatti") res.sendFile(__dirname+"/public/contatti.html");
-    else if (det=="manageServer") res.sendFile(__dirname+"/public/manageServer.html");
+    if (det == "bar") res.sendFile(__dirname + "/public/prodotti_bar_miscele.html");
+    else if (det == "casa") res.sendFile(__dirname + "/public/prodotti_casa.html");
     else res.status(404).send("Opss! Pagina errata.");
 });
 
-router.get('/prodotti/:det',(req,res) =>
+app.get('/prodotti/casa/:det', function(req,res)
 {
-	// req=checkLangSession(req);
     var det = req.params.det;
-    if (det=="bar") res.sendFile(__dirname+"/public/prodotti_bar_miscele.html");
-    else if (det=="casa") res.sendFile(__dirname+"/public/prodotti_casa.html");
+    if (det == "macchine") res.sendFile(__dirname + "/public/prodotti_bar_macchine.html");
+    else if (det == "capsulecialde") res.sendFile(__dirname + "/public/prodotti_ocs_capsule.html");
     else res.status(404).send("Opss! Pagina errata.");
 });
 
-router.get('/prodotti/casa/:det',(req,res) =>
+app.post('/cookieRequest', function(req,res)
 {
-	// req=checkLangSession(req);
-    var det = req.params.det;
-    if (det=="macchine") res.sendFile(__dirname+"/public/prodotti_bar_macchine.html");
-    else if (det=="capsulecialde") res.sendFile(__dirname+"/public/prodotti_ocs_capsule.html");
-    else res.status(404).send("Opss! Pagina errata.");
+	var data = req.body;
+	var sql = "insert into preferencesCookie(publicIP, detail) values(?,?)";
+	dbconn.query(sql,[data.ipaddr,data.pref]);
+	res.send("ok");
 });
 
-router.post('/requests',(req,res) =>
+app.post('/session', function(req,res)
 {
+	if(req.session.lang == undefined)
+	{ 
+		req.session.lang = "en-gb";
+	}
+	
 	// req=checkLangSession(req);
-	if (req.body.val=="barmiscele")
+    var cod = req.body.code;
+	if (cod == 1)
+	{
+		res.send(req.session.lang);
+	}
+	if (cod == 2)
+	{
+		req.session.lang = req.body.lang;
+		res.send("ok");
+	}
+});
+
+app.post('/formRequest', function(req,res)
+{
+	req=checkLangSession(req);
+    var data = req.body;
+
+    var htmlInfo = "<html><h2>Hai una nuova richiesta di informazioni!</h2><h4>Di seguito i dettagli</h4><p>Nome e cognome: "+data.name+"</p><p>Societ&agrave;: "+data.soc+"</p><p>Numero di telefono: "+data.number+"</p><p>Email: "+data.emailAddress+"</p><p>Messaggio: "+data.message+"</p><button><a href='mailto:"+data.emailAddress+"'>Rispondi al cliente</a></button></html>";
+    var mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: 'info@farnesecaffe.it',subject: 'Richiesta informazioni', html: htmlInfo};
+    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
+    
+    var htmlYour = "<html><h2>La tua richiesta</h2><h4>Di seguito il messaggio della richiesta che hai inviato a farnesecaffe.it</h4><p>"+data.message+"</p></html>";
+    mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: data.emailAddress,subject: 'La tua richiesta', html: htmlYour};
+    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
+    //res.end(data);
+});
+
+app.post('/requests', function(req,res)
+{
+	if (req.body.val == "barmiscele")
 	{
 		var query = "select m.nome as nome, m.descr as descr, m.pathDescr as pdescr from miscela m, listino l where l.idmiscelaFk=m.id and l.idformatoFk=(select distinct id from formato where descr like 'sacco 1kg') and m.descr not like '' order by m.id";
 		dbconn.query(query, function (err, rows, fields)
@@ -153,9 +198,9 @@ router.post('/requests',(req,res) =>
 		});
 	}
 
-
-    	if (req.body.val=="casacc")
-    	{
+	
+	if (req.body.val == "casacc")
+    {
 		var query = "";
 		if (req.session.lang=="en-gb"){query = "select m.nome as misc, group_concat(f.nameImg) as form, group_concat(f.titleEn) as tit from listino l, miscela m, formato f where l.idusoFk=1 and l.idmiscelaFk=m.id and l.idformatoFk=f.id group by misc order by misc DESC;";}
 		else {query = "select m.nome as misc, group_concat(f.nameImg) as form, group_concat(f.titleIt) as tit from listino l, miscela m, formato f where l.idusoFk=1 and l.idmiscelaFk=m.id and l.idformatoFk=f.id group by misc order by misc DESC;";}		
@@ -204,9 +249,10 @@ router.post('/requests',(req,res) =>
 			}
 			res.send(html);
 		});
-    	}
+    }
 
-	if (req.body.val=="macchine")
+
+	if (req.body.val == "macchine")
 	{
 		var query = "select f.glbtype as tipo, group_concat(m.modello) as modello from formato f, macchina m where f.id=m.idformatoFk and (f.glbtype like 'cialda' or f.glbtype like 'capsula') group by tipo order by tipo;";
 		
@@ -271,7 +317,8 @@ router.post('/requests',(req,res) =>
 		});
 	}
 
-	if (req.body.val=="detmacchina")
+
+	if (req.body.val == "detmacchina")
 	{
 		var imgMac=req.body.fileMac;
 		var nameMac=imgMac.replaceAll("_"," ").toUpperCase();
@@ -297,54 +344,11 @@ router.post('/requests',(req,res) =>
 	}
 });
 
-router.post('/formRequest',(req,res) =>
-{
-	req=checkLangSession(req);
-    var data = req.body;
-
-    var htmlInfo = "<html><h2>Hai una nuova richiesta di informazioni!</h2><h4>Di seguito i dettagli</h4><p>Nome e cognome: "+data.name+"</p><p>Societ&agrave;: "+data.soc+"</p><p>Numero di telefono: "+data.number+"</p><p>Email: "+data.emailAddress+"</p><p>Messaggio: "+data.message+"</p><button><a href='mailto:"+data.emailAddress+"'>Rispondi al cliente</a></button></html>";
-    var mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: 'info@farnesecaffe.it',subject: 'Richiesta informazioni', html: htmlInfo};
-    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
-    
-    var htmlYour = "<html><h2>La tua richiesta</h2><h4>Di seguito il messaggio della richiesta che hai inviato a farnesecaffe.it</h4><p>"+data.message+"</p></html>";
-    mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: data.emailAddress,subject: 'La tua richiesta', html: htmlYour};
-    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
-    console.log("---");
-    //res.end(data);
-});
-
-router.post('/cookieRequest',(req,res) =>
-{
-    var data = req.body;
-	var sql = "insert into preferencesCookie(publicIP, detail) values(?,?)";
-	dbconn.query(sql,[data.ipaddr,data.pref]);
-	res.send("ok");
-});
-
-router.post('/session',(req,res) =>
-{
-	if(req.session.lang == undefined)
-	{ 
-		req.session.lang = "en-gb";
-	}
-	
-	// req=checkLangSession(req);
-    var cod = req.body.code;
-	if (cod == 1)
-	{
-		res.send(req.session.lang);
-	}
-	if (cod == 2)
-	{
-		req.session.lang = req.body.lang;
-		res.send("ok");
-	}
-});
+//---------------------------------------------------------------------------------------------------------------
 
 http.get('*',function(req, res)
 { 
     res.redirect('https://' + req.headers.host + req.url);
-    //res.redirect('https://example.com' + req.url);
 });
 
 http.listen(portHTTP);
