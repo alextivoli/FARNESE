@@ -289,6 +289,50 @@
   overflow: hidden;
 }
 
+.home-sub{
+  background-color: #B89181;
+  /* background: linear-gradient(0deg, rgba(116, 71, 19, 0.222), rgba(164, 67, 18, 0.773)), url('../immagini/one_love/back-sub.jpg')  no-repeat center; 
+background-size: contain; */
+}
+
+.home-sub-mean{
+  background-color: #212529;
+  height: 10vh;
+}
+
+.text-home-sub{
+  font-family: 'EB Garamond', serif;
+}
+
+.text-home-sub-meam{
+  font-family: 'Playfair', serif;
+  text-align: center;
+  color: #c0c0c0;
+  font-size: 10vh;
+  
+}
+
+.home-sub-1{
+  background: url('../immagini/one_love/AFPH2715-2.jpg') no-repeat center right ;
+    overflow: hidden;
+    background-size: contain;
+    height: 100vh;
+}
+
+.home-sub-2 {
+  background: url('../immagini/one_love/sub-2.jpg') no-repeat center left;
+  overflow: hidden;
+  background-size: contain;
+  height: 100vh;
+}
+
+.home-sub-content{
+  display: flex;
+  text-align: center;
+  margin: 5% 5%;
+}
+
+
 .contact{
   background: linear-gradient(0deg, rgba(140, 106, 82, 0.222), rgba(64, 25, 3, 0.773)), url('../img/background/contact.jpg') no-repeat center; 
   height: auto;
@@ -330,6 +374,13 @@
     position: center;
   }
 
+.logo-one-love{
+  width: 20%;
+  height: 20%;
+  object-fit: contain;
+  position: center;
+  scale: 3;
+}
 
 .logo-farnese-caffe_index {
   margin-top: 20vh;
@@ -399,11 +450,80 @@
 }
 
 
+.slider {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.slider .slide {
+  position: absolute;
+  top: 5vh;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slider 25s infinite;
+}
+
+.slider .slide:nth-child(1) {
+  background-image: url('../immagini/one_love/AFPH0124.jpg');
+  animation-delay: 0s;
+}
+
+.slider .slide:nth-child(2) {
+  background-image: url('../immagini/one_love/AFPH0011.jpg');
+  animation-delay: -5s;
+}
+
+.slider .slide:nth-child(3) {
+  background-image: url('../immagini/one_love/AFPH0132.jpg');
+  animation-delay: -10s;
+}
+
+.slider .slide:nth-child(4) {
+  background-image: url('../immagini/one_love/AFPH2597-2.jpg');
+  animation-delay: -15s;
+}
+
+.slider .slide:nth-child(5) {
+  background-image: url('../immagini/one_love/AFPH0124.jpg');
+  animation-delay: -20s;
+}
+
+
+@keyframes slider {
+
+  0%,
+  8%,
+  100% {
+    opacity: 1;
+    animation-timing-function: ease;
+    z-index: 0;
+  }
+
+  20% {
+    opacity: 0;
+    animation-timing-function: step-end;
+    z-index: 0;
+  }
+
+  88% {
+    opacity: 1;
+    animation-timing-function: step-end;
+    z-index: -1;
+  }
+}
+
+
 
 
 
 @media (min-width: 1418px) {
   #navbarToggleExternalContent{display: none;}
+ 
 }
 
 @keyframes nav_comparse { 
@@ -1027,9 +1147,34 @@
   margin-bottom: 5vh;
 }
 
+@media(max-width: 1300px){
+  .home-sub-content{
+    font-size: 5vw;
+    height: fit-content;
+  }
+  .home-sub-1 {
+      background: #B89181;
+      height: auto;
+    }
+  
+  .home-sub-2 {
+    background: #B89181;
+    height: auto;
+  }
+
+  .chidden{
+    display: none;
+  }
+
+  .text-home-sub-meam{
+    font-size: 4vh;
+  }
+}
+
 
 @media (max-width: 800px) {
 
+  
   .h-s{display: none;}
   .h-p{display: none;}
   .h-c{display: none;}
@@ -1098,6 +1243,9 @@
 
   .logo-farnese-caffe{width: 5vw; height: 5vh; scale: 3;}
   .logo-farnese-caffe_index{margin-top: 10vh; max-width:60vw; height: 40%;}
+
+  .logo-farnese-one_love{margin-top: 15vh;
+  }
 
   .text_frame_1{font-size: 4vh; width: 70vw;}
   .text_origin{font-size: 10vw;}
@@ -1245,4 +1393,45 @@
   background: #100808;
   height: 100vh;
   width: 100vw;
+}
+
+
+
+body {
+  background: #2d2d37;
+}
+
+a {
+  color: #2d2d37;
+  text-decoration: none;
+}
+
+.arrow {
+  text-align: center;
+  margin: 8% 0;
+}
+
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
 }
