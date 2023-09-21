@@ -24,6 +24,7 @@ const router = express.Router();
 // const redisclient = redis.createClient({ legacyMode: true });
 const redisclient = redis.createClient();
 
+//app.use(express.static(__dirname));
 app.use("/",express.static(__dirname));
 app.use("/",express.static(__dirname+"/public"));
 app.use("/",express.static(__dirname+"/video"));
@@ -36,22 +37,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({secret: 'BerTiv2022', store: new redisStore({ host: 'localhost', port: 6379, client: redisclient, ttl: 260}), saveUninitialized: false, resave: false}));
 app.use('/', router);
 
-app.use((req, res) =>
-{
+//app.use((req, res, next) =>
+//{
     // const host = req.hostname; 
     // if (req.headers.host == domains[0]) {return res.redirect('https://farnesecaffe.it/');}
     // else {res.redirect('https://' + req.headers.host + req.originalUrl);}
     // else {return res.redirect(__dirname+'/contatti.html');}
 
-	const host = req.hostname;
-	console.log(host);
-	if (host === 'simonetovagliari.farnesecaffe.it') {
+	//const host = req.hostname;
+	//console.log(host);
+	//if (host === 'simonetovagliari.farnesecaffe.it') {
 		// Effettua il reindirizzamento alla pagina specifica
-		console.log("test");
-		return res.redirect('https://simonetovagliari.farnesecaffe.it/contatti.html');
-		
-	}
-});
+		//console.log("test");
+		//res.redirect('https://simonetovagliari.farnesecaffe.it/contatti.html');
+		//next();
+	//}
+
+//});
 
 //MySQL connection
 dbconn.connect();
@@ -68,36 +70,60 @@ function checkLangSession(r)
 router.get('/',(req,res) =>
 {
     // req=checkLangSession(req);
-    if (req.headers.host == domains[0]) {res.sendFile(__dirname);}
-    else {res.writeHead(200, { 'Content-Type': 'text/plain' }).send('Benvenuto nel sottodominio del dominio di secondo livello!');}
+    if (req.headers.host == domains[0]) {res.redirect('https://farnesecaffe.it/contatti.html');}
+    else {res.redirect('https://farnesecaffe.it/prodotti.html');}
 });
 
 router.get('/:det',(req,res) =>
 {
     // req=checkLangSession(req);
     var det = req.params.det;
-    if (det=="prodotti") res.sendFile(__dirname+"/public/prodotti.html");
-    else if (det=="contatti") res.sendFile(__dirname+"/public/contatti.html");
-    else if (det=="manageServer") res.sendFile(__dirname+"/public/manageServer.html");
-    else res.status(404).send("Opss! Pagina errata.");
+    //var host = req.headers.host;
+    //if (host == domains[0])
+    //{
+    	if (det=="prodotti") res.sendFile(__dirname+"/public/prodotti.html");
+    	else if (det=="contatti") res.sendFile(__dirname+"/public/contatti.html");
+    	else if (det=="manageServer") res.sendFile(__dirname+"/public/manageServer.html");
+    	else res.status(404).send("Opss! Pagina errata.");
+    //}
+   // else
+   // {
+     //	res.status(404).send("Opss! Pagina errata.");
+   // }
 });
 
 router.get('/prodotti/:det',(req,res) =>
 {
-	// req=checkLangSession(req);
+    // req=checkLangSession(req);
     var det = req.params.det;
-    if (det=="bar") res.sendFile(__dirname+"/public/prodotti_bar_miscele.html");
-    else if (det=="casa") res.sendFile(__dirname+"/public/prodotti_casa.html");
-    else res.status(404).send("Opss! Pagina errata.");
+    //var host = req.headers.host;
+    //if (host == domains[0])
+    //{
+    	if (det=="bar") res.sendFile(__dirname+"/public/prodotti_bar_miscele.html");
+    	else if (det=="casa") res.sendFile(__dirname+"/public/prodotti_casa.html");
+    	else res.status(404).send("Opss! Pagina errata.");
+    //}
+    //else
+    //{
+     	//res.status(404).send("Opss! Pagina errata.");
+    //}
 });
 
 router.get('/prodotti/casa/:det',(req,res) =>
 {
-	// req=checkLangSession(req);
+    // req=checkLangSession(req);
     var det = req.params.det;
-    if (det=="macchine") res.sendFile(__dirname+"/public/prodotti_bar_macchine.html");
-    else if (det=="capsulecialde") res.sendFile(__dirname+"/public/prodotti_ocs_capsule.html");
-    else res.status(404).send("Opss! Pagina errata.");
+    //var host = req.headers.host;
+    //if (host == domains[0])
+    //{
+    	if (det=="macchine") res.sendFile(__dirname+"/public/prodotti_bar_macchine.html");
+    	else if (det=="capsulecialde") res.sendFile(__dirname+"/public/prodotti_ocs_capsule.html");
+    	else res.status(404).send("Opss! Pagina errata.");
+    //}
+    //else
+    //{
+     	//res.status(404).send("Opss! Pagina errata.");
+    //}
 });
 
 router.post('/requests',(req,res) =>
@@ -329,7 +355,7 @@ router.post('/session',(req,res) =>
 	}
 	
 	// req=checkLangSession(req);
-    var cod = req.body.code;
+    	var cod = req.body.code;
 	if (cod == 1)
 	{
 		res.send(req.session.lang);
@@ -340,6 +366,13 @@ router.post('/session',(req,res) =>
 		res.send("ok");
 	}
 });
+
+//app.get('*',function(req, res)
+//{
+    //console.log("ssssssssss"); 
+    //res.redirect('https://farnesecaffe.it/contatti.html');
+//console.log("ffffffff"); 
+//});
 
 http.get('*',function(req, res)
 { 

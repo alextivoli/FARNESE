@@ -3,20 +3,42 @@
   color: #212529 ;
 }
 
+.dropdown-menu{
+  cursor: pointer;
+}
+
 /* text */
 
 .text_bar{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:10vh;
   font-weight: 400;
   text-align: center;
 
 }
 
+.text-corsi-home-1{
+  color: #c0c0c0;
+    font-family: 'EB Garamond', serif;
+    font-size: 5vh;
+    margin-right: 5vw;
+    font-weight: 400;
+    text-align: center;
+}
+
+.text-corsi-home-2 {
+  color: #c0c0c0;
+  font-family: 'EB Garamond', serif;
+  font-size: 5vh;
+  margin-left: 5vw;
+  font-weight: 400;
+  text-align: center;
+}
+
 .text_origin{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:10vh;
   font-weight: 400;
   text-align: center;
@@ -25,7 +47,7 @@
 
 .text_title_machine{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:5vh;
   font-weight: 400;
   text-align: center;
@@ -34,7 +56,7 @@
 
 .text_detail{
   color: #181313;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:3vh;
   text-align: left;
   /* margin-left: 2vw; */
@@ -45,7 +67,7 @@
 
 .text_description_machine{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:3vh;
   text-align: left;
   /* margin-left: 2vw; */
@@ -56,7 +78,7 @@
 
 .text_description_capsula{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:2vh;
   text-align: center;
   margin-left: 2vw;
@@ -66,7 +88,7 @@
 
 .text_contact{
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:2vh;
   font-weight: 400;
   text-align: center;
@@ -74,7 +96,7 @@
 
 .text_contact_input{
   color: #100808;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:2vh;
   font-weight: 400;
 }
@@ -204,6 +226,99 @@
   opacity: 0;
 }
 
+.box-wine{
+  background-color: #212529cc;
+  padding: 3%;
+}
+
+
+.box-canteen{
+  height: min-content;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.box-details-canteen{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-details-canteen{
+  width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    color: #212529;
+    font-size: 16px;
+    border: none;
+    align-items: center;
+      display: grid;
+}
+
+
+@media (max-width: 768px) {
+  .button-details-canteen {
+    width: 80px;
+    height: 80px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-details-canteen {
+    width: 60px;
+    height: 60px;
+    font-size: 12px;
+  }
+}
+
+.text-title-canteen{
+  color: #212529;
+    font-family: 'EB Garamond', serif;
+    font-size: 10vh;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 20vh;
+}
+
+.text-title-single-canteen{
+  color: #212529;
+    font-family: 'EB Garamond', serif;
+    font-size: 7vh;
+    font-weight: 400;
+      text-align: center;
+}
+
+.text-title-description-wine{
+  color: #c0c0c0;
+    font-family: 'EB Garamond', serif, bold;
+    font-size: 3vh;
+    font-weight: 200;
+    text-align: left;
+}
+
+.text-title-single-wine{
+  margin-left: 5vw;
+  color: #212529;
+  font-family: 'EB Garamond', serif, bold;
+  font-size: 3vh;
+}
+
+.text-sub-description-wine{
+  color: #c0c0c0;
+    font-family: 'EB Garamond', serif, bold;
+}
+
+.text-description-canteen{
+  color: #212529;
+  font-family: 'EB Garamond', serif;
+  font-size: 3vh;
+  font-weight: 400;
+  text-align: center;
+  word-wrap: break-word;
+}
+
 @keyframes movement_slide_prodotti_text {
 
   from { bottom: -100vw; top: -100vw;}
@@ -295,6 +410,25 @@
 background-size: contain; */
 }
 
+.home-sub-products{
+  background-attachment: fixed !important;
+  position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-size: cover;
+    z-index: -1;
+  background: linear-gradient(0deg, rgba(227, 176, 104, 0.222), rgba(130, 79, 112, 0.773)), url('../img/one_love/bg_prodotti.jpg') no-repeat ;
+}
+
+.container-wave{
+  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
 .home-sub-mean{
   background-color: #212529;
   height: 10vh;
@@ -313,28 +447,36 @@ background-size: contain; */
 }
 
 .home-sub-1{
-  background: url('../immagini/one_love/AFPH2715-2.jpg') no-repeat center right ;
+  background: url('../img/one_love/AFPH2715-2.jpg') no-repeat center right ;
     overflow: hidden;
     background-size: contain;
     height: 100vh;
 }
 
 .home-sub-2 {
-  background: url('../immagini/one_love/sub-2.jpg') no-repeat center left;
+  background: url('../img/one_love/sub-2.jpg') no-repeat center left;
   overflow: hidden;
   background-size: contain;
   height: 100vh;
 }
 
 .home-sub-content{
-  display: flex;
   text-align: center;
   margin: 5% 5%;
+  display: table-cell;
+  vertical-align: bottom;
+
 }
 
 
 .contact{
   background: linear-gradient(0deg, rgba(140, 106, 82, 0.222), rgba(64, 25, 3, 0.773)), url('../img/background/contact.jpg') no-repeat center; 
+  height: auto;
+  overflow: hidden;
+}
+
+.contact_st{
+  /* background: linear-gradient( rgba(140, 106, 82, 0.222), rgba(64, 25, 3, 0.773)), url('../img/one_love/back_contact.jpg') no-repeat right; */
   height: auto;
   overflow: hidden;
 }
@@ -366,6 +508,11 @@ background-size: contain; */
   height: auto;
 }
 
+.contact_call_st{
+  margin-top: 15vh;
+  width: 70vw;
+  height: auto;
+}
 
 .logo-farnese-caffe {
     width:25%; 
@@ -391,6 +538,14 @@ background-size: contain; */
   position: absolute;
 }
 
+.logo-sm_index {
+  margin-top: 30vh;
+  max-width: 30vw;
+  height: 30%;
+  object-fit: contain;
+  position: absolute;
+}
+
 .logo-farnese-caffe-footer{
   width:15%; 
   height: 15%;
@@ -398,7 +553,7 @@ background-size: contain; */
 
 
 .navbar-brand{
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   text-align: center;
   color: #c0c0c0;
   width: 10vw;
@@ -406,7 +561,7 @@ background-size: contain; */
 }
 
 .navbar-brand-logo{
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   text-align: center;
   color: #c0c0c0;
   font-size: 2vh;
@@ -469,27 +624,27 @@ background-size: contain; */
 }
 
 .slider .slide:nth-child(1) {
-  background-image: url('../immagini/one_love/AFPH0124.jpg');
+  background-image: url('../img/one_love/AFPH0124.jpg');
   animation-delay: 0s;
 }
 
 .slider .slide:nth-child(2) {
-  background-image: url('../immagini/one_love/AFPH0011.jpg');
+  background-image: url('../img/one_love/AFPH0011.jpg');
   animation-delay: -5s;
 }
 
 .slider .slide:nth-child(3) {
-  background-image: url('../immagini/one_love/AFPH0132.jpg');
+  background-image: url('../img/one_love/AFPH0132.jpg');
   animation-delay: -10s;
 }
 
 .slider .slide:nth-child(4) {
-  background-image: url('../immagini/one_love/AFPH2597-2.jpg');
+  background-image: url('../img/one_love/AFPH2597-2.jpg');
   animation-delay: -15s;
 }
 
 .slider .slide:nth-child(5) {
-  background-image: url('../immagini/one_love/AFPH0124.jpg');
+  background-image: url('../img/one_love/AFPH0124.jpg');
   animation-delay: -20s;
 }
 
@@ -586,7 +741,7 @@ background-size: contain; */
 } 
 
 .text_frame_1{
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:5vh;
   color: darkred;
   margin-top: 50vh;
@@ -618,17 +773,35 @@ background-size: contain; */
 }
 
 .text_contact_title{
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:10vh;
   color: #fff;
 }
 
+.text_contact_title_st {
+  font-family: 'Playfair', serif;
+  font-size: 10vh;
+  color: #fff;
+}
+
 .text_contact_cap{
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:3vh;
   color: #fff;
 }
 
+.text_contact_cap_mail_st {
+  font-size: 3vh;
+}
+
+.text_frame_corsi {
+  font-family: 'EB Garamond', serif;
+  font-size: 2em;
+  color: rgb(255, 255, 255);
+  width: 80vw;
+  margin-bottom: 10vh;
+  margin-top: 10vh;
+}
 
 .animate-character_contact
 {
@@ -740,7 +913,7 @@ background-size: contain; */
   min-width: 100vw;
   color: white;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:3vh;
 }
 
@@ -780,6 +953,57 @@ background-size: contain; */
   display: none;
 }
 
+.frame_video_corsi_home {
+  justify-content: center;
+  display: none;
+  animation: nav_comparse 1s ease;
+}
+
+.frame_video_corsi{
+  margin-top: 40vh;
+  justify-content: center;
+  display: none;
+  animation: nav_comparse 1s ease;
+}
+
+.video-corsi{
+  top: 30vh;
+  position: absolute;
+  object-fit: cover;
+  width: 100vw;
+  height: 50vh;
+  
+}
+
+.video-corsi-mid {
+  object-fit: cover;
+  width: 100vw;
+  height: 50vh;
+
+}
+
+.bounceCorsi{
+display: none;
+  animation: nav_comparse 1s ease;
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  width: calc(55vw - 100%);
+  height: 1px;
+    /* Spessore della linea */
+  background-color: black;
+  /* 100% - 45vw (distanza dalla destra) */
+}
+
+.custom-line {
+  border: none;
+  border-top: 1px solid #c0c0c0;
+  /* Cambia il colore se desideri */
+  margin: 10px 0;
+  /* Aggiungi spazio sopra e sotto la linea */
+}
 /* immagini */
 
 .img_carousel{
@@ -812,6 +1036,32 @@ background-size: contain; */
   margin-left: 20vw;
   margin-right: 10vw;
   border: 0.5vh solid  #4F2B1C;
+  overflow: hidden;
+}
+
+.img_home-corsi-1 {
+  align-self: center;
+  object-fit: cover;
+  border-radius: 100%;
+  height: 40vh;
+  width: 40vh;
+  max-height: 40vh;
+  max-width: 40vh;
+  margin-right: 5vw;
+  border: 0.5vh solid #000000cc;
+  overflow: hidden;
+}
+
+.img_home-corsi-2 {
+  align-self: center;
+  object-fit: cover;
+  border-radius: 100%;
+  height: 40vh;
+  width: 40vh;
+  max-height: 40vh;
+  max-width: 40vh;
+  margin-left: 5vw;
+  border: 0.5vh solid #4F2B1C;
   overflow: hidden;
 }
 
@@ -898,6 +1148,13 @@ background-size: contain; */
 }
 
 
+.scaled-image {
+  max-width: 100%;
+  height: auto;
+  scale: 1.5;
+}
+
+
 /* bottoni */
 
 .button-1 {
@@ -978,7 +1235,7 @@ background-size: contain; */
 
 .button_text_machine_change {
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:large;
   font-weight: 200;
   text-align: center;
@@ -995,7 +1252,7 @@ background-size: contain; */
 
 .button-text-0 {
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 400;
   text-align: center;
@@ -1003,7 +1260,7 @@ background-size: contain; */
 
 .button-text-1 {
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 400;
   text-align: center;
@@ -1011,7 +1268,7 @@ background-size: contain; */
 
 .button-text-2 {
   color: #c0c0c0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 400;
   text-align: center;
@@ -1019,7 +1276,7 @@ background-size: contain; */
 
 .button-text-3 {
   color: #faf6f6cc;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 40;
   text-align: center;
@@ -1031,11 +1288,20 @@ background-size: contain; */
   border: none;
 }
 
+.btn_contact_st{
+  color: #faf6f6cc;
+    text-align: center;
+    border: none;
+    width: 60vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
 
 
 .btn_contact_small{
   color: #faf6f6cc;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 10;
   text-align: center;
@@ -1061,7 +1327,7 @@ background-size: contain; */
 
 .button_contact_submit{
   color: #faf6f6cc;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 40;
   text-align: center;
@@ -1069,7 +1335,7 @@ background-size: contain; */
 
 .button_contact_submit:hover{
   color: #951919cc;
-  font-family: 'Inter', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size:xx-large;
   font-weight: 40;
   text-align: center;
@@ -1169,6 +1435,20 @@ background-size: contain; */
   .text-home-sub-meam{
     font-size: 4vh;
   }
+
+  .text-title-canteen{
+    font-size: 5vh;
+  }
+
+  .text-title-single-canteen{
+    font-size: 3vh;
+    text-align: left;
+  }
+
+  .text-description-canteen{
+    font-size: 1.5vh;
+      text-align: left;
+  }
 }
 
 
@@ -1190,9 +1470,31 @@ background-size: contain; */
   .button_details_machine{width: 50vw;}
 
   .button-text-1{font-size: 1.5em; font-weight: 10vw;}
+
+  .logo-sm_index {scale: 3}
   
   .img_home-1{margin-left: 0%; margin-right: 0%;}
   .img_home-2{margin-left: 0%; margin-right: 0%;}
+  .img_home-corsi-1 {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
+  .img-bottle{display: none;}
+
+  .img_home-corsi-2 {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  .text-corsi-home-1 {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
+  .text-corsi-home-2{
+    margin-left: 0%;
+    margin-right: 0%;
+  }
   .img_prodotti_miscele{
     width: 25%;
     height: 50%;
@@ -1252,8 +1554,10 @@ background-size: contain; */
   .text_bar{font-size: 15vw;}
   .text_title_machine{font-size: 8vw;}
   .text_description_machine{font-size: 5vw; margin-left: 3vw; margin-right: 3vw;text-align: center;}
-  .text_contact_title{font-size: 15vw;}
+  .text_contact_title{font-size: 10vw;}
   .text_contact_cap{font-size: 5vw;}
+  .text_contact_cap_mail_st{font-size: 3vw;}
+  .text_frame_corsi{font-size: 5vw;}
 
   .frame_1{
     height: auto;
@@ -1297,9 +1601,6 @@ background-size: contain; */
   .navbar-toggler{display: block; margin-right: 2vw;}
   .menu{margin-top:inherit; height: 100vh; background:#212529 ;}
 
- 
-
-  
 
   /* .sub_frame_carousel{
     display: none;
@@ -1387,6 +1688,15 @@ background-size: contain; */
   .aos-item_title{
     margin-top: 10vh;
   }
+
+  .text-title-description-wine{
+    font-size: 90%;
+  }
+
+  .text-sub-description-wine{
+    font-size: 90%;
+  }
+
 }
 
 #loading_screen{
@@ -1399,6 +1709,10 @@ background-size: contain; */
 
 body {
   background: #2d2d37;
+}
+
+body::-webkit-scrollbar{
+  display: none;
 }
 
 a {
