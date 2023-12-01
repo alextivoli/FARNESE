@@ -9,6 +9,22 @@
 
 /* text */
 
+.text-click{
+  color: #212529;
+  font-family: 'EB Garamond', serif;
+  font-size:5vh;
+  font-weight: 400;
+  text-align: center;
+}
+
+.text-limit{
+  color: #c0c0c0;
+  font-family: 'EB Garamond', serif;
+  font-size:3vh;
+  font-weight: 400;
+  text-align: center;
+}
+
 .text_bar{
   color: #c0c0c0;
   font-family: 'EB Garamond', serif;
@@ -229,6 +245,13 @@
 .box-wine{
   background-color: #212529cc;
   padding: 3%;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.box-wine:hover{
+  background-color: #212529cc;
+  color: #c0c0c0;
 }
 
 
@@ -236,8 +259,15 @@
   height: min-content;
   width: 100vw;
   display: flex;
-  justify-content: center;
 }
+
+.box-canteen-wine{
+  height: min-content;
+  width: 100vw;
+  display: grid;
+}
+
+
 
 .box-details-canteen{
   display: flex;
@@ -284,8 +314,8 @@
 
 .text-title-single-canteen{
   color: #212529;
-    font-family: 'EB Garamond', serif;
-    font-size: 7vh;
+    font-family: 'EB Garamond', serif, bold;
+    font-size: 2rem;
     font-weight: 400;
       text-align: center;
 }
@@ -298,11 +328,18 @@
     text-align: left;
 }
 
+.text-desc-wine-init{
+  margin: 5vw;
+  color: #c0c0c0;
+  font-family: 'EB Garamond', serif;
+  font-size: 3vh;
+}
+
 .text-title-single-wine{
   margin-left: 5vw;
   color: #212529;
-  font-family: 'EB Garamond', serif, bold;
-  font-size: 3vh;
+  font-family: 'EB Garamond', serif;
+  font-size: 4rem;
 }
 
 .text-sub-description-wine{
@@ -313,7 +350,7 @@
 .text-description-canteen{
   color: #212529;
   font-family: 'EB Garamond', serif;
-  font-size: 3vh;
+  font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
   word-wrap: break-word;
@@ -1149,9 +1186,9 @@ display: none;
 
 
 .scaled-image {
-  max-width: 100%;
+  max-width: 70%;
   height: auto;
-  scale: 1.5;
+  scale: 1;
 }
 
 
@@ -1368,6 +1405,17 @@ display: none;
   display: none;
 }
 
+.img-bottle:hover{
+  background-color: #212529cc;
+  
+}
+
+
+
+.text-click:hover{
+  color: #c0c0c0;
+}
+
 .col_prodotti{
   height: auto; 
   margin-bottom: 1%; 
@@ -1413,7 +1461,17 @@ display: none;
   margin-bottom: 5vh;
 }
 
+.mobile{
+  display: none;
+}
+
+.no-mobile{
+  display: block;
+}
+
 @media(max-width: 1300px){
+
+
   .home-sub-content{
     font-size: 5vw;
     height: fit-content;
@@ -1428,33 +1486,49 @@ display: none;
     height: auto;
   }
 
-  .chidden{
+  /* .chidden{
     display: none;
-  }
+  } */
 
   .text-home-sub-meam{
     font-size: 4vh;
   }
 
-  .text-title-canteen{
-    font-size: 5vh;
-  }
 
-  .text-title-single-canteen{
-    font-size: 3vh;
-    text-align: left;
-  }
-
-  .text-description-canteen{
-    font-size: 1.5vh;
-      text-align: left;
-  }
 }
 
 
 @media (max-width: 800px) {
 
+  .logo-one-love{
+    scale: 7;
+  }
+
+  .text-click{
+    font-size: 3vh;
+  }
+
+  .text-limit{
+    font-size: 2vh;
+  }
+
+   .chidden{
+    display: none;
+  }
+
+  .mobile{
+    display: block;
+  }
   
+  .no-mobile{
+    display: none;
+  }
+
+  .col-footer-mobile{
+    width: auto !important;
+  }
+  
+
   .h-s{display: none;}
   .h-p{display: none;}
   .h-c{display: none;}
@@ -1480,7 +1554,9 @@ display: none;
     margin-right: 0%;
   }
 
-  .img-bottle{display: none;}
+  .img-bottle{justify-content: center;}
+
+ 
 
   .img_home-corsi-2 {
     margin-left: 0%;
@@ -1541,6 +1617,11 @@ display: none;
   .img_browser{
     display: none;
   }
+
+  .scaled-image{
+    margin-right: 0;
+    scale: 1
+  }
   
 
   .logo-farnese-caffe{width: 5vw; height: 5vh; scale: 3;}
@@ -1558,6 +1639,8 @@ display: none;
   .text_contact_cap{font-size: 5vw;}
   .text_contact_cap_mail_st{font-size: 3vw;}
   .text_frame_corsi{font-size: 5vw;}
+  .text-desc-wine-init{display: none;}
+  .text-title-single-wine{font-size: 2rem;}
 
   .frame_1{
     height: auto;
@@ -1644,11 +1727,15 @@ display: none;
     margin-top: 0vh;
   margin-bottom: 0vh;
   }
+  
+  .text-description-canteen{
+    font-size: 0.6rem;
+  }
     
 }
 
 
-
+/* AOS */
 
 *,
 *:before,

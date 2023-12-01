@@ -157,6 +157,21 @@ app.post('/formRequest', function(req,res)
     var data = req.body;
 
     var htmlInfo = "<html><h2>Hai una nuova richiesta di informazioni!</h2><h4>Di seguito i dettagli</h4><p>Nome e cognome: "+data.name+"</p><p>Societ&agrave;: "+data.soc+"</p><p>Numero di telefono: "+data.number+"</p><p>Email: "+data.emailAddress+"</p><p>Messaggio: "+data.message+"</p><button><a href='mailto:"+data.emailAddress+"'>Rispondi al cliente</a></button></html>";
+    var mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: 'simone.tovagliari@farnesecaffe.it',subject: 'Richiesta informazioni', html: htmlInfo};
+    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
+    
+    var htmlYour = "<html><h2>La tua richiesta</h2><h4>Di seguito il messaggio della richiesta che hai inviato a Simone Tovagliari</h4><p>"+data.message+"</p></html>";
+    mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: data.emailAddress,subject: 'La tua richiesta', html: htmlYour};
+    mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
+    //res.end(data);
+});
+
+app.post('/formRequestSimoTova', function(req,res)
+{
+	req=checkLangSession(req);
+    var data = req.body;
+
+    var htmlInfo = "<html><h2>Hai una nuova richiesta di informazioni!</h2><h4>Di seguito i dettagli</h4><p>Nome e cognome: "+data.name+"</p><p>Societ&agrave;: "+data.soc+"</p><p>Numero di telefono: "+data.number+"</p><p>Email: "+data.emailAddress+"</p><p>Messaggio: "+data.message+"</p><button><a href='mailto:"+data.emailAddress+"'>Rispondi al cliente</a></button></html>";
     var mailOptions = {from: '"farnesecaffe.it" <no-reply@farnesecaffe.it>',to: 'info@farnesecaffe.it',subject: 'Richiesta informazioni', html: htmlInfo};
     mailconn.sendMail(mailOptions, function(error, info){if (error) {console.log(error);} else {console.log('Email sent');}});
     
@@ -370,19 +385,29 @@ app.post('/requests', function(req,res)
 		{
 			if (rows.length>0)
 			{
-				var html = "<div class='row d-flex slide_animated_prodotti_text justify-content-center container-wave'><svg xmlns='wave5.svg' viewBox='0 0 1440 320'><path fill='??' fill-opacity='1' d='M0,192L60,160C120,128,240,64,360,80C480,96,600,192,720,240C840,288,960,288,1080,272C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'></path></svg><div class='container box-canteen' style='background-color: ??;'><div class='col-6'><h1 class='text-title-single-canteen'>!!</h1><p class='text-description-canteen'>^^</p></div><div class='col-4 box-details-canteen'><a class='btn button-details-canteen' type='button' href='../st/details_canteen.html?canteen=!!'><i class='bi bi-arrow-right-circle'style='scale: 3;'></i></a></div></div><svg xmlns='wave6.svg' viewBox='0 0 1440 320'><path fill='??' fill-opacity='1' d='M0,128L40,144C80,160,160,192,240,197.3C320,203,400,181,480,165.3C560,149,640,139,720,165.3C800,192,880,256,960,240C1040,224,1120,128,1200,74.7C1280,21,1360,11,1400,5.3L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'></path></svg></div>";				
+				var html = "<div class='row d-flex slide_animated_prodotti_text justify-content-center container-wave'><svg xmlns='wave5.svg' viewBox='0 0 1440 320'><path fill='??' fill-opacity='1' d='M0,192L60,160C120,128,240,64,360,80C480,96,600,192,720,240C840,288,960,288,1080,272C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'></path></svg><div class='container box-canteen' style='background-color: ??;'><div class='col-8'><h1 class='text-title-single-canteen'>!!</h1><p class='text-description-canteen'>^^</p><p class='text-description-canteen mb-3'>&&</p></div><div class='col-4 box-details-canteen'><a class='btn button-details-canteen' type='button' href='../st/details_canteen.html?canteen=!!'><i class='bi bi-arrow-right-circle'style='scale: 3;'></i></a></div></div><svg xmlns='wave6.svg' viewBox='0 0 1440 320'><path fill='??' fill-opacity='1' d='M0,128L40,144C80,160,160,192,240,197.3C320,203,400,181,480,165.3C560,149,640,139,720,165.3C800,192,880,256,960,240C1040,224,1120,128,1200,74.7C1280,21,1360,11,1400,5.3L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'></path></svg></div>";				
 				var toSend = '';
 				
 				for (var i=0; i<rows.length; i++)
 				{
+
 					var descr = '';
-					if (req.session.lang == 'it-it') {descr = rows[i].descrIT;}
-					else {descr = rows[i].descrENG;}
+					var descr2 = '';
+					if (req.session.lang == 'it-it') 
+					{
+						descr = rows[i].descrIT;
+						descr2 = rows[i].descDistrIT;
+					}
+					else {
+						descr = rows[i].descrENG;
+						descr2 = rows[i].descDistrENG;
+					}
 					
 					toSend = toSend+html;
 					toSend = toSend.replaceAll("!!", rows[i].nome);
 					toSend = toSend.replaceAll("??", rows[i].colore);
-					toSend = toSend.replaceAll("^^", descr);
+					toSend = toSend.replaceAll("^^", descr.replaceAll(".",".<br>"));
+					toSend = toSend.replaceAll("&&", descr2);
 				}
 				res.send(toSend);
 			}
@@ -400,12 +425,10 @@ app.post('/requests', function(req,res)
 			{
 				// var singleDiv = "<svg xmlns='wave5.svg' viewBox='0 0 1440 320'><path fill='#855c5ccc' fill-opacity='1' d='M0,192L60,160C120,128,240,64,360,80C480,96,600,192,720,240C840,288,960,288,1080,272C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'></path> </svg><div class='container box-canteen' style='background-color: #855c5ccc;'><div class='col-8'><h1 class='text-title-single-wine mb-2'> <b>??</b> </h1><div class='container box-wine'><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DESCWINE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='NOTEDEG'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ASSEMBLAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TIRAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DOSAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='MATURAZIONE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ACCENO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='VINIF'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div><div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TEMP'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div></div></div><div class='col-4 img-bottle '><img class='scaled-image' src='../img/one_love/bottle/bt1.png' alt='BottigliaWine'></div></div><svg xmlns='wave6.svg' viewBox='0 0 1440 320'><path fill='#855c5ccc' fill-opacity='1'd='M0,128L40,144C80,160,160,192,240,197.3C320,203,400,181,480,165.3C560,149,640,139,720,165.3C800,192,880,256,960,240C1040,224,1120,128,1200,74.7C1280,21,1360,11,1400,5.3L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'></path></svg>";
 
-				var singleDiv = "<svg xmlns='wave5.svg' viewBox='0 0 1440 320'><path fill='#855c5ccc' fill-opacity='1' d='M0,192L60,160C120,128,240,64,360,80C480,96,600,192,720,240C840,288,960,288,1080,272C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'></path> </svg><div class='container box-canteen' style='background-color: #855c5ccc;'><div class='col'><h1 class='text-title-single-wine mb-2'> <b>??</b> </h1><div class='container box-wine'>";
-
+				var singleDiv;
 
 				for (var i=0; i<rows.length; i++)
-				{
-					htmlToSend = htmlToSend + singleDiv;
+				{					
 					var nome = rows[i].nome;
 					var descr = '';
 					var degust = '';
@@ -416,65 +439,78 @@ app.post('/requests', function(req,res)
 					var acceno = '';
 					var vinificaz = '';
 					var tempS = rows[i].tempservizio;
+					var visibile = rows[i].visibile;
+					var limite = rows[i].limite;
 
-					if (req.session.lang=="it-it")
-					{
-						descr = rows[i].descrIT;
-						degust = rows[i].degustIT;
-						assemb = rows[i].assembIT;
-						maturaz = rows[i].maturazIT;
-						acceno = rows[i].accenoIT;
-						vinificaz = rows[i].vinificazIT;
-					}
-					else
-					{
-						descr = rows[i].descrENG;
-						degust = rows[i].degustENG;
-						assemb = rows[i].assembENG;
-						maturaz = rows[i].maturazENG;
-						acceno = rows[i].accenoENG;
-						vinificaz = rows[i].vinificazENG;
-					}
+					if(visibile == 1){
 
-					htmlToSend = htmlToSend.replaceAll("??", nome);
-					if(descr!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DESCWINE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", descr);
-					}
-					if(degust!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='NOTEDEG'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", degust);
-					}
-					if(assemb!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ASSEMBLAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", assemb);
-					}
-					if(tiraggio != " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TIRAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", tiraggio);
-					}
-					if(dosaggio!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DOSAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", dosaggio);
-					}
-					if(maturaz!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='MATURAZIONE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", maturaz);
-					}
-					if(acceno!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ACCENO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", acceno);
-					}
-					if(vinificaz!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='VINIF'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", vinificaz);
-					}
-					if(tempS!= " "){
-						htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TEMP'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div></div></div>"
-						htmlToSend = htmlToSend.replace("!!", tempS);
-					}
-					htmlToSend = htmlToSend + "<div class='col-4 img-bottle '><img class='scaled-image' src='../img/one_love/bottle/"+nome+".png' alt='BottigliaWine'></div></div><svg xmlns='wave6.svg' viewBox='0 0 1440 320'><path fill='#855c5ccc' fill-opacity='1'd='M0,128L40,144C80,160,160,192,240,197.3C320,203,400,181,480,165.3C560,149,640,139,720,165.3C800,192,880,256,960,240C1040,224,1120,128,1200,74.7C1280,21,1360,11,1400,5.3L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'></path></svg>";
-			
+						singleDiv = "<svg xmlns='wave5.svg' viewBox='0 0 1440 320'><path fill='"+ rows[i].colore +"' fill-opacity='1' d='M0,192L60,160C120,128,240,64,360,80C480,96,600,192,720,240C840,288,960,288,1080,272C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'></path> </svg><div class='container box-canteen-wine' style='background-color: "+ rows[i].colore +";'><div class='row'><h1 class='text-title-single-wine mb-2'> <b>??</b></h1></div><div class='row'><div class=' btn col container box-wine' onclick='mostraDiv2(this)' style='display:none' id='btn-teory"+ i +"'>";
+
+						htmlToSend = htmlToSend + singleDiv;
+	
+						if (req.session.lang=="it-it")
+						{
+							descr = rows[i].descrIT.replaceAll(".",".<br>");
+							degust = rows[i].degustIT.replaceAll(".",".<br>");
+							assemb = rows[i].assembIT.replaceAll(".",".<br>");
+							maturaz = rows[i].maturazIT.replaceAll(".",".<br>");
+							acceno = rows[i].accenoIT.replaceAll(".",".<br>");
+							vinificaz = rows[i].vinificazIT.replaceAll(".",".<br>");
+						}
+						else
+						{
+							descr = rows[i].descrENG.replaceAll(".",".<br>");
+							degust = rows[i].degustENG.replaceAll(".",".<br>");
+							assemb = rows[i].assembENG.replaceAll(".",".<br>");
+							maturaz = rows[i].maturazENG.replaceAll(".",".<br>");
+							acceno = rows[i].accenoENG.replaceAll(".",".<br>");
+							vinificaz = rows[i].vinificazENG.replaceAll(".",".<br>");
+						}
+	
+						htmlToSend = htmlToSend.replaceAll("??", nome);
+						if(descr!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DESCWINE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", descr);
+						}
+						if(degust!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='NOTEDEG'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", degust);
+						}
+						if(assemb!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ASSEMBLAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", assemb);
+						}
+						if(tiraggio != ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TIRAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", tiraggio);
+						}
+						if(dosaggio!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='DOSAGGIO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", dosaggio);
+						}
+						if(maturaz!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='MATURAZIONE'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", maturaz);
+						}
+						if(acceno!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='ACCENO'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", acceno);
+						}
+						if(vinificaz!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='VINIF'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", vinificaz);
+						}
+						if(tempS!= ""){
+							htmlToSend = htmlToSend + "<div class='row mb-3'><div class='col-4'><p class='text-title-description-wine lang' key='TEMP'></p></div><div class='col text-sub-description-wine'>!!<div class='custom-line'></div></div></div></div></div>"
+							htmlToSend = htmlToSend.replace("!!", tempS);
+						}
+						htmlToSend = htmlToSend + "<div class='btn col img-bottle' onclick='mostraDiv1(this)' id='btn-bottle"+ i +"'><div class='row'> <div class='col'><img class='scaled-image mb-3' src='../img/one_love/bottle/"+nome+".png' alt='BottigliaWine'></div><div class='col no-mobile'><p class='text-desc-wine-init'>"+descr+" </p><p class='text-click lang' key='TEXTCLICK'></p><p class='text-limit lang' key='TEXTLIMIT'></p></div>"
+						if(limite == 1){
+							htmlToSend = htmlToSend + "<p class='text-limit mobile lang' key='TEXTLIMIT'></p>"
+						}
+						htmlToSend = htmlToSend + "<p class='text-click mobile lang' key='TEXTCLICK'></div></div></div><svg xmlns='wave6.svg' viewBox='0 0 1440 320'><path fill='"+ rows[i].colore +"' fill-opacity='1'd='M0,128L40,144C80,160,160,192,240,197.3C320,203,400,181,480,165.3C560,149,640,139,720,165.3C800,192,880,256,960,240C1040,224,1120,128,1200,74.7C1280,21,1360,11,1400,5.3L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'></path></svg>";
+	
+					}		
 				}
 
 				}
